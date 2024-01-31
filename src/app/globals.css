@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* spinner styles */
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50%);
+  border-radius: 50%;
+  border: 8px solid black;
+  animation: spin 1s linear infinite;
+}
+
+.loadingSpinner::before {
+  content: "";
+  position: absolute;
+  height: 8px;
+  width: 90px;
+  background: black;
+  top: 50px;
+  transform: translateY(-130%);
+}
+
+.loadingSpinner::after {
+  content: "";
+  position: absolute;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  background: white;
+  top: 50px;
+  left: 50px;
+  transform: translate(-72%, -68%);
+  box-shadow: inset 0 0 0 8px black, inset 0 0 0 10px white,
+    inset 0 0 0 12px black;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* end spinner styles */
